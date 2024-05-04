@@ -16,7 +16,7 @@ func decrease_player_life(value):
 	
 	
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	# Add the gravity.
 	# Handle jump.
 	label.text = str(player_life)

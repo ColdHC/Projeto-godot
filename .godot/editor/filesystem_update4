@@ -3,4 +3,6 @@ res://addons/copilot/small_icon.tres
 res://addons/copilot/large_icon.tres
 res://scenes/player.tscn
 res://scenes/Monster.tscn
+res://scripts/CharacterBody2D.gd
 res://scripts/Monster.gd
+res://scenes/Manager.gd
