@@ -1,0 +1,6 @@
+res://scenes/game.tscn
+res://addons/copilot/small_icon.tres
+res://addons/copilot/large_icon.tres
+res://scenes/player.tscn
+res://scenes/Monster.tscn
+res://scripts/Monster.gd

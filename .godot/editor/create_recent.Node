@@ -1,0 +1,11 @@
+Label
+Timer
+CollisionShape2D
+Node
+Area2D
+RayCast2D
+AnimatedSprite2D
+CharacterBody2D
+TileMap
+Camera2D
+StaticBody2D

@@ -1,0 +1,99 @@
+[gd_scene load_steps=13 format=3 uid="uid://cg0rcmhg41gv0"]
+
+[ext_resource type="Script" path="res://scripts/Monster.gd" id="1_bhk6p"]
+[ext_resource type="Texture2D" uid="uid://b1mgfyfu2s0rv" path="res://sprites/characters/Cacodaemon Sprite Sheet.png" id="1_qdrmc"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sorlm"]
+atlas = ExtResource("1_qdrmc")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m0t15"]
+atlas = ExtResource("1_qdrmc")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3l1bu"]
+atlas = ExtResource("1_qdrmc")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_40jkb"]
+atlas = ExtResource("1_qdrmc")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xd1tv"]
+atlas = ExtResource("1_qdrmc")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qtgap"]
+atlas = ExtResource("1_qdrmc")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mkjxd"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sorlm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m0t15")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3l1bu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_40jkb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xd1tv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qtgap")
+}],
+"loop": true,
+"name": &"moving",
+"speed": 8.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_f071a"]
+radius = 14.0357
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5h8yq"]
+radius = 65.0692
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_uhdd1"]
+radius = 30.0
+height = 62.0
+
+[node name="CharacterBody2D" type="CharacterBody2D"]
+script = ExtResource("1_bhk6p")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_mkjxd")
+animation = &"moving"
+autoplay = "moving"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(7, 4)
+shape = SubResource("CircleShape2D_f071a")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(7, 4)
+shape = SubResource("CircleShape2D_5h8yq")
+
+[node name="DAMAGE" type="Area2D" parent="."]
+collision_mask = 2
+
+[node name="killzone" type="CollisionShape2D" parent="DAMAGE"]
+position = Vector2(4, 1)
+shape = SubResource("CapsuleShape2D_uhdd1")
+
+[connection signal="area_shape_exited" from="Area2D" to="." method="_on_area_2d_area_shape_exited"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
+[connection signal="area_shape_exited" from="DAMAGE" to="." method="_on_area_2d_area_shape_exited"]
+[connection signal="body_entered" from="DAMAGE" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="DAMAGE" to="." method="_on_damage_body_entered"]
+[connection signal="body_exited" from="DAMAGE" to="." method="_on_area_2d_body_exited"]
+[connection signal="body_exited" from="DAMAGE" to="." method="_on_damage_body_exited"]
