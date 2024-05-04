@@ -1,7 +1,8 @@
-[gd_scene load_steps=12 format=3 uid="uid://cg0rcmhg41gv0"]
+[gd_scene load_steps=13 format=3 uid="uid://cg0rcmhg41gv0"]
 
 [ext_resource type="Script" path="res://scripts/Monster.gd" id="1_bhk6p"]
 [ext_resource type="Texture2D" uid="uid://b1mgfyfu2s0rv" path="res://sprites/characters/Cacodaemon Sprite Sheet.png" id="1_qdrmc"]
+[ext_resource type="PackedScene" uid="uid://c2h73qdft7ils" path="res://scenes/damage.tscn" id="3_qrs36"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_sorlm"]
 atlas = ExtResource("1_qdrmc")
@@ -59,7 +60,7 @@ radius = 14.0357
 [sub_resource type="CircleShape2D" id="CircleShape2D_5h8yq"]
 radius = 65.0692
 
-[node name="monster" type="CharacterBody2D"]
+[node name="CharacterBody2D" type="CharacterBody2D"]
 script = ExtResource("1_bhk6p")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -78,6 +79,13 @@ collision_mask = 2
 position = Vector2(7, 4)
 shape = SubResource("CircleShape2D_5h8yq")
 
+[node name="Timer" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+
+[node name="DAMAGE" parent="." instance=ExtResource("3_qrs36")]
+
 [connection signal="area_shape_exited" from="Area2D" to="." method="_on_area_2d_area_shape_exited"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
